@@ -18,8 +18,8 @@ public class chromosome {
 	        }
 	        numOfExercise = 0;
 	}
-
-
+	
+	hiii~
 
 }
 
