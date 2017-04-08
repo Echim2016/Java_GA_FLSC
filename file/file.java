@@ -1,12 +1,16 @@
-import java.io.*;
 package file;
+import java.io.*;
+
+
 
 public class file {
+	
+	public static int MAN = 5;
+	public static int PARK = 5;
+	public static int FACILITY = 5;
+	public static int SCALE = 5;
+
 	public static void main(String args[]) throws IOException {
-		int MAN = 5;
-		int PARK = 5;
-		int FACILITY = 5;
-		int SCALE = 5;
 
 		double[] k = file1Input_double("ga/k_1.csv",FACILITY);
 		int[] c = file1Input("ga/c_1.csv",FACILITY);
