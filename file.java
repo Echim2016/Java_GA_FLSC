@@ -1,4 +1,5 @@
 import java.io.*;
+package file;
 
 public class file {
 	public static void main(String args[]) throws IOException {
@@ -138,8 +139,3 @@ public class file {
 	}
 }
 
-
-public class FLSC {
-
-	
-}
