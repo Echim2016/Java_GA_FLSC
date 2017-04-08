@@ -1,3 +1,4 @@
+package FLSC;
 import java.io.*;
 import java.util.Random;
 
