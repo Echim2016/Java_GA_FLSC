@@ -1,4 +1,6 @@
 package FLSC;
+import java.util.Random;
+
 import file.file;
 
 public class FLSC {
@@ -10,6 +12,7 @@ public class FLSC {
 	private int[][] parent_pool;
 	private int[][] optimal_facility_area;
 	private int[][] kid_pool;
+	private int poolLength =20;
 	private 
 		ArrayList<chromosome> chromosomeArray = new ArrayList<chromosome>;
 
@@ -305,13 +308,67 @@ public class FLSC {
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    public void mutation(){
+    	Random rand = new Random();
+    	final int mutationPosibility = 100;
+
+        for (int i = 0; i < poolLength; i++){
+            int r = rand.nextInt(mutationPosibility);
+            if(r == 0) {
+                int pos = rand.nextInt(parkNum);
+                int changedNum = rand.nextInt(6);
+                kid_pool[i][pos] = changedNum;
+            }
+        }
+    }
+    
+    
+    public void display_parent(){
+    	System.out.println("\nparent_pool~~~~~~~~~~~~\n");
+    	for(int i=0;i<poolLength;i++) {
+    		for(int j=0;j<parkNum;j++){
+    			System.out.print(parent_pool[i][j]+" ");
+    		}
+    		System.out.println();
+		}
+    }
+    
+    public void display_kid(){
+    	System.out.println("\nkid_pool~~~~~~~~~~~~\n");
+    	for(int i=0;i<2*poolLength;i++) {
+    		for(int j=0;j<parkNum;j++){
+    			System.out.print(kid_pool[i][j]+" ");
+    		}
+    		System.out.println();
+		}
+    }
+    
+    public void display_cost(){
+    	System.out.println("\ntotalCost~~~~~~~~~~~\n");
+    	System.out.println("$");
+    	System.out.print(this.totalCost);
+    }
+    
     public void GA() {
 		
     	int callIteration = 10;
         this.original_gene(file.S);
 
         while(callIteration>1){
-
+ 
             this.crossover();
             this.mutation();
             System.out.println("yoooo\n");
