@@ -237,7 +237,34 @@ public class FLSC {
     		int[][][] exerciseLocation = new int[manNum][][];
     		int[] currentElders = new int[manNum];
     		double tempMax;
-    		
+    		Pair<double, Pair<int,int>> pairPreference;
+    		arrayList< arrayList< Pair< double, Pair<int,int> > > > vectorPreference(parkNum);
+    	}
+    	
+    	for(int i=0;i<manNum;i++) {
+    		currentElders[i] = d[i];
+            exerciseLocation[i] = new int[parkNum][];
+            for(int j = 0; j< parkNum; j++){
+                exerciseLocation[i][j] = new int[facilityNum];
+                for (int k = 0; k < facilityNum; k++){
+                    exerciseLocation[i][j][k] = 0;
+                }
+            }
+    	}
+    	
+    	for (int i = 0; i< parkNum; i++) {
+            ff_area[i] = new int[facilityNum];
+            availableDistribution[i] = new int[facilityNum];
+            for (int j = 0; j < facilityNum; j++){
+                ff_area[i][j]=0;
+            }
+        }
+    	
+    	while(1) {
+    		boolean negative = 1;
+    		for(int i=0;i<manNum;i++) {
+    			
+    		}
     	}
     }
     
