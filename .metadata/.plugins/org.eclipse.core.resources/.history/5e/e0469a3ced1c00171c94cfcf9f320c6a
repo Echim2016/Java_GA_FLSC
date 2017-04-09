@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 
-import file.file;
+//import file.file;
 import org.javatuples.*;
 
 public class FLSC {
@@ -97,7 +97,7 @@ public class FLSC {
 	
 	
     	for (int i = 1; i < poolLength/2; i++){
-    	    for (int j = 0; j < parkNum/2; j++){
+    	    for (int j = 0; j < poolLength/2; j++){
     	        kid_pool[2*i-1][j] = parent_pool[2*i-1][j];
     	    }
 	
@@ -264,33 +264,35 @@ public class FLSC {
                 }
             }
         	
-        	for(int iteration=0;iteration<costIteration;iteration++) {
+        	for(int i=0;i<costIteration;i++) {
                 tempMax=0;
                 double tempPeople=0;
-                ff_area = randomZ(file.q, file.T, num_of_chromosome);
-                while(cost(file.f, file.c, ff_area, num_of_chromosome) > totalBudget){
-                    ff_area = randomZ(file.q, file.T, num_of_chromosome);
+                ff_area = randomZ(q, T, num_of_chromosome);
+                while(cost(f, c, ff_area, num_of_chromosome) > totalBudget){
+                    ff_area = randomZ(q, T, num_of_chromosome);
                 }
                 for (int i = 0; i< parkNum; i++) {
                     for (int j = 0; j < facilityNum; j++){
-                        availableDistribution[i][j]=(int) (ff_area[i][j]*(file.k[j]));
+                        availableDistribution[i][j]= ff_area[i][j]*k[j];
+                    }
+
+                }
+        	}
+    	}
+
+    	
+    	while(1) {
+    		boolean negative = 1;
+    		for(int i=0;i<manNum;i++) {
+    			for(int j = 0; j < parkNum; j++){
+                    for(int k = 0; k < facilityNum; k++){
+                        pairPreference.first=p[i][j][k];
+                        pairPreference.second.first=j;
+                        pairPreference.second.second=k;
+                        vectorPreference[j].push_back(pairPreference);
                     }
                 }
-                while(true) {
-            		boolean negative = true;
-            		for(int i=0;i<manNum;i++) {
-            			for(int j = 0; j < parkNum; j++){
-                            for(int k = 0; k < facilityNum; k++){
-                            	pairPreference.setAt0(file.p[i][j][k]);
-                                pairPreference.L=file.p[i][j][k];
-                                pairPreference.R.L=j;
-                                pairPreference.R.R=k;
-                                vectorPreference[j].push_back(pairPreference);
-                            }
-                        }
-            		}
-            	}
-        	}
+    		}
     	}
     }
     

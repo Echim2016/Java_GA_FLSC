@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Random;
 
 
-import file.file;
+//import file.file;
 import org.javatuples.*;
 
 public class FLSC {
@@ -97,7 +97,7 @@ public class FLSC {
 	
 	
     	for (int i = 1; i < poolLength/2; i++){
-    	    for (int j = 0; j < parkNum/2; j++){
+    	    for (int j = 0; j < poolLength/2; j++){
     	        kid_pool[2*i-1][j] = parent_pool[2*i-1][j];
     	    }
 	
@@ -281,7 +281,7 @@ public class FLSC {
             		for(int i=0;i<manNum;i++) {
             			for(int j = 0; j < parkNum; j++){
                             for(int k = 0; k < facilityNum; k++){
-                            	pairPreference.setAt0(file.p[i][j][k]);
+//                            	pairPreference.
                                 pairPreference.L=file.p[i][j][k];
                                 pairPreference.R.L=j;
                                 pairPreference.R.R=k;
