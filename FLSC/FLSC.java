@@ -216,6 +216,25 @@ public class FLSC {
     				break;
     			}
     		}
+    		System.out.println();
+    		if(equalCount == parkNum) {
+    			the_same = 1;
+    			index = i;
+    			break;
+    		}
+    	}
+    	
+    	if(the_same == 1) {
+    		System.out.println("SAME!!!!!");
+    		return chromosomeArray[index].numOfExercise;
+    	}
+    	else {
+    		int[][] availableDistribution = new int[parkNum][];
+    		int[][] ff_area = new int[parkNum][];
+    		int[][][] exerciseLocation = new int[manNum][][];
+    		int[] currentElders = new int[manNum];
+    		double tempMax;
+    		
     	}
     }
     
