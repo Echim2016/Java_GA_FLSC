@@ -2,6 +2,7 @@ package FLSC;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import file.chromosome;
 
 
 import file.file;
@@ -13,17 +14,18 @@ public class FLSC {
 	
 	private int totalBudget;
 	private int manNum = file.MAN;
-	private int parkNum = file.PARK;
+	private static int parkNum = file.PARK;
 	private int facilityNum = file.FACILITY;
 	private int totalCost;
-	private int[][] parent_pool;
+	private static int[][] parent_pool;
 	private int[][] optimal_facility_area;
-	private int[][] kid_pool;
-	private int poolLength = 20;
+	private static int[][] kid_pool;
+	private static int poolLength = 20;
 	ArrayList<chromosome> chromosomeArray = new ArrayList<chromosome>();
-	Random rand = new Random();
+	static Random rand = new Random();
 
 	public static void main(String args[]){
+		
 	}
 
 	public FLSC(int man,int park,int facility,int budget) {
@@ -67,7 +69,7 @@ public class FLSC {
     	}
     }
 
-    public void original_gene(int[][] S) {
+    public static void original_gene(int[][] S) {
     	int scale = 0;
     	for(int i=0; i<poolLength; i++){
         	for(int j=0; j< parkNum; j++){
@@ -85,7 +87,7 @@ public class FLSC {
     	}
     }
 
-    public void crossover() {
+    public static void crossover() {
 		for (int i = 0; i < poolLength/2; i++){
     	    for (int j = 0; j < parkNum/2; j++){
     	        kid_pool[2*i][j] = parent_pool[2*i][j];
@@ -97,6 +99,7 @@ public class FLSC {
 	
 	
     	for (int i = 1; i < poolLength/2; i++){
+
     	    for (int j = 0; j < parkNum/2; j++){
     	        kid_pool[2*i-1][j] = parent_pool[2*i-1][j];
     	    }
@@ -106,7 +109,7 @@ public class FLSC {
     	    }
     	    
     	}
-	
+    	/*
     	for (int i = 0; i < parkNum; i++){       
     	    kid_pool[poolLength-1][i] = parent_pool[poolLength-1][i];
     	}
@@ -114,6 +117,7 @@ public class FLSC {
     	for (int i = parkNum/2; i < parkNum; i++){       
     	    kid_pool[poolLength-1][i]=parent_pool[poolLength-2][i];
     	}
+    	*/
 	
     	for (int i = poolLength ; i < 2*poolLength; i++) {
     	    for (int j = 0; j < parkNum; j++) {
@@ -198,7 +202,7 @@ public class FLSC {
 		total_cost = f_cost + c_cost;
 		return total_cost;
     }
-
+/*
     public double fitness(int num_of_chromosome) {
     	boolean the_same;
     	int equalCount;
@@ -296,6 +300,7 @@ public class FLSC {
     
     
     
+    */
     
     
     
@@ -347,28 +352,41 @@ public class FLSC {
     
     
     
+     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    /*
+    public void selection(){
+    	
+    	vector < pair <double, int> > vector_result;
+        FLSC.Pair < double, int > result;
+        Pair (double, int) result;
+        
+        for(int i = 0; i<poolLength*2; i++){
+            result.first = fitness(i);
+            System.out.println("fit!\n");
+            result.second = i;
+            vector_result.push_back(result);
+        }
+
+        priority_queue < pair <double, int> > select;
+
+        for(int i = 0; i < poolLength*2; i++){
+            select.push(vector_result[i]);
+        }
+
+        for(int i = 0; i < poolLength; i++){
+            parent_pool[i] = kid_pool[select.top().second];
+            select.pop(); 
+        }
+        sort(chromosomeArray.begin(), chromosomeArray.end(), comparison);
+        for(int i = 0; i < poolLength; i++){
+            chromosomeArray.pop_back();
+        }
+
+        System.out.println("Selection!~!\n");
+    	
+    }
+    */
     
     
     
@@ -389,10 +407,10 @@ public class FLSC {
     }
     
     
-    public void display_parent(){
+    public static void display_parent(){
     	System.out.println("\nparent_pool~~~~~~~~~~~~\n");
-    	for(int i=0;i<poolLength;i++) {
-    		for(int j=0;j<parkNum;j++){
+    	for(int i=0;i<20;i++) {
+    		for(int j=0;j<file.PARK;j++){
     			System.out.print(parent_pool[i][j]+" ");
     		}
     		System.out.println();
@@ -408,6 +426,15 @@ public class FLSC {
     		System.out.println();
 		}
     }
+    public void display_S(){
+    	System.out.println("\nS~~~~~~~~~~~~\n");
+    	for(int i=0;i<parkNum;i++) {
+    		for(int j=0;j<file.SCALE;j++){
+    			System.out.print(file.S[i][j]+" ");
+    		}
+    		System.out.println();
+		}
+    }
     
     public void display_cost(){
     	System.out.println("\ntotalCost~~~~~~~~~~~\n");
@@ -419,7 +446,8 @@ public class FLSC {
 		
     	int callIteration = 10;
         this.original_gene(file.S);
-
+        this.display_parent();
+/*
         while(callIteration>1){
  
             this.crossover();
@@ -428,7 +456,7 @@ public class FLSC {
             this.selection();
             callIteration--;
         }
-
+*/
     }
     
     
