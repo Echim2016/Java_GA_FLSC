@@ -36,6 +36,7 @@ public class file {
 		FLSC test = new FLSC(MAN,PARK,FACILITY,30000);
 		test.original_gene(S);
 		test.crossover();
+		test.mutation();
 		test.display_kid();
 		test.display_parent();
 		
