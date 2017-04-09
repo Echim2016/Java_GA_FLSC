@@ -1,3 +1,5 @@
+package FLSC;
+
 public class Pair<L,R> {
 
   private final L left;
