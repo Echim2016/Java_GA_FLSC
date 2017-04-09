@@ -1,6 +1,5 @@
 package FLSC;
-import java.io.*;
-import java.util.Random;
+import file.file;
 
 public class FLSC {
 	private int totalBudget;
@@ -59,7 +58,7 @@ public class FLSC {
     	}
     }
 
-    public static void original_gene(int[][] S) {
+    public void original_gene(int[][] S) {
     	int scale = 0;
     	for(int i=0; i<poolLength; i++){
         	for(int j=0; j< parkNum; j++){
@@ -77,8 +76,7 @@ public class FLSC {
     	}
     }
 
-    public static void crossover() {
-
+    public void crossover() {
 		for (int i = 0; i < poolLength/2; i++){
     	    for (int j = 0; j < parkNum/2; j++){
     	        kid_pool[2*i][j] = parent_pool[2*i][j];
@@ -116,7 +114,7 @@ public class FLSC {
 
     }
 
-    public static int[][] randomZ(int[][] q,int[][] T,int num_of_chromosome) {
+    public int[][] randomZ(int[][] q,int[][] T,int num_of_chromosome) {
     	int js_area = 0;	
 		int is_zero = 0;
 
@@ -171,7 +169,7 @@ public class FLSC {
 		return facility_floor_area;
     }
 
-    public static int cost(int[][] f, int[] c, int[][] facility_floor_area, int num_of_chromosome) {
+    public int cost(int[][] f, int[] c, int[][] facility_floor_area, int num_of_chromosome) {
     	int f_cost = 0;
 		int c_cost = 0;
     	int total_cost = 0;
@@ -192,7 +190,7 @@ public class FLSC {
 		return total_cost;
     }
 
-    public static double fitness(int num_of_chromosome) {
+    public double fitness(int num_of_chromosome) {
     	boolean the_same;
     	int equalCount;
     	int index;
@@ -220,5 +218,89 @@ public class FLSC {
     		}
     	}
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    public void GA() {
+		
+    	int callIteration = 10;
+        this.original_gene(file.S);
+
+        while(callIteration>1){
+
+            this.crossover();
+            this.mutation();
+            System.out.println("yoooo\n");
+            this.selection();
+            callIteration--;
+        }
+
+    }
+
 }
 

@@ -9,6 +9,14 @@ public class file {
 	public static int PARK = 5;
 	public static int FACILITY = 5;
 	public static int SCALE = 5;
+	public static double[] k ;
+	public static int[] c ;
+	public static int[] d  ;
+	public static int[][] S;
+	public static int[][] T ;
+	public static int[][] f ;
+	public static int[][] q ;
+	public static double[][][] p ;
 
 	public static void main(String args[]) throws IOException {
 
@@ -21,6 +29,10 @@ public class file {
 		int[][] q = file2Input("ga/q_1.csv",PARK,SCALE);
 		double[][][] p = file3Input("ga/p_1.csv",MAN,PARK,FACILITY);
 		//print3D(p,MAN,PARK,FACILITY);
+	}
+	
+	public static int[][] getS(){
+		return S;
 	}
 
 //--------------------------Reading the file----------------------------------//
