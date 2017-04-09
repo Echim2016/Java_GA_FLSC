@@ -322,26 +322,40 @@ public class FLSC {
     
     
     
+     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    public void selection(){
+    	
+    	vector < pair <double, int> > vector_result;
+        FLSC.Pair < double, int > result;
+        Pair <double, int> result;
+        
+        for(int i = 0; i<poolLength*2; i++){
+            result.first = fitness(i);
+            System.out.println("fit!\n");
+            result.second = i;
+            vector_result.push_back(result);
+        }
+
+        priority_queue < pair <double, int> > select;
+
+        for(int i = 0; i < poolLength*2; i++){
+            select.push(vector_result[i]);
+        }
+
+        for(int i = 0; i < poolLength; i++){
+            parent_pool[i] = kid_pool[select.top().second];
+            select.pop(); 
+        }
+        sort(chromosomeArray.begin(), chromosomeArray.end(), comparison);
+        for(int i = 0; i < poolLength; i++){
+            chromosomeArray.pop_back();
+        }
+
+        System.out.println("Selection!~!\n");
+    	
+    }
     
     
     
