@@ -3,7 +3,7 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 
 public class pq {
-	
+	/*
     public static void main(String[] args)
     {
         Comparator< Pair <double, int> > comparator = new StringLengthComparator();
@@ -17,5 +17,6 @@ public class pq {
             System.out.println(queue.remove());
         }
     }
+    */
 
 }

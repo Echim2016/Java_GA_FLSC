@@ -1,6 +1,8 @@
 package file;
 import java.io.*;
 
+import FLSC.FLSC;
+
 
 
 public class file {
@@ -28,7 +30,16 @@ public class file {
 		int[][] f = file2Input("ga/f_1.csv",PARK,SCALE);
 		int[][] q = file2Input("ga/q_1.csv",PARK,SCALE);
 		double[][][] p = file3Input("ga/p_1.csv",MAN,PARK,FACILITY);
-		//print3D(p,MAN,PARK,FACILITY);
+		//print2D(S,PARK,FACILITY);
+		
+		
+		FLSC test = new FLSC(MAN,PARK,FACILITY,30000);
+		test.original_gene(S);
+		test.crossover();
+		test.display_kid();
+		test.display_parent();
+		
+		
 	}
 	
 	public static int[][] getS(){
