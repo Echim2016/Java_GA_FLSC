@@ -1,7 +1,5 @@
-package file;
+package FLSC;
 import java.io.*;
-
-import FLSC.FLSC;
 
 
 
@@ -23,29 +21,16 @@ public class file {
 	public static void main(String args[]) throws IOException {
 
 		double[] k = file1Input_double("ga/k_1.csv",FACILITY);
-		int[] c = file1Input("ga/c_1.csv",FACILITY);
-		int[] d = file1Input("ga/d_1.csv",MAN);
-		int[][] S = file2Input("ga/S_1.csv",PARK,SCALE);
-		int[][] T = file2Input("ga/T_1.csv",PARK,FACILITY);
-		int[][] f = file2Input("ga/f_1.csv",PARK,SCALE);
-		int[][] q = file2Input("ga/q_1.csv",PARK,SCALE);
+		c = file1Input("ga/c_1.csv",FACILITY);
+		d = file1Input("ga/d_1.csv",MAN);
+		S = file2Input("ga/S_1.csv",PARK,SCALE);
+		T = file2Input("ga/T_1.csv",PARK,FACILITY);
+		f = file2Input("ga/f_1.csv",PARK,SCALE);
+		q = file2Input("ga/q_1.csv",PARK,SCALE);
 		double[][][] p = file3Input("ga/p_1.csv",MAN,PARK,FACILITY);
-		//print2D(S,PARK,FACILITY);
-		
-		
-		FLSC test = new FLSC(MAN,PARK,FACILITY,30000);
-		test.original_gene(S);
-		test.crossover();
-		test.mutation();
-		test.display_kid();
-		test.display_parent();
-		
-		
+//		print3D(p,MAN,PARK,FACILITY);
 	}
 	
-	public static int[][] getS(){
-		return S;
-	}
 
 //--------------------------Reading the file----------------------------------//
 	public static int[] file1Input(String filePath,int x) throws IOException {
@@ -164,6 +149,37 @@ public class file {
 				}
 			}
 		}
+	}
+	
+//----------------------------Getter-------------------------------
+	public static int[][] getS() throws IOException{
+		S = file2Input("ga/S_1.csv",PARK,SCALE);
+		return S;
+	}
+	
+	public static int[] getD() throws IOException {
+		d = file1Input("ga/d_1.csv",MAN);
+		return d;
+	}
+	
+	public static int[][] getQ() throws IOException {
+		q = file2Input("ga/q_1.csv",PARK,SCALE);
+		return q;
+	}
+	
+	public static int[][] getT() throws IOException {
+		T = file2Input("ga/T_1.csv",PARK,FACILITY);
+		return T;
+	}
+	
+	public static int[] getC() throws IOException {
+		c = file1Input("ga/c_1.csv",FACILITY);
+		return c;
+	}
+	
+	public static int[][] getF() throws IOException {
+		f = file2Input("ga/f_1.csv",PARK,SCALE);
+		return f;
 	}
 }
 
