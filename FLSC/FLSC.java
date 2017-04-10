@@ -1,21 +1,23 @@
 package FLSC;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Random;
 import java.util.PriorityQueue;  
 
-import file.chromosome;
-import file.file;
+//import file.chromosome;
+//import file.file;
 import org.javatuples.*;
 
 public class FLSC {
 	
 	private int costIteration = 2;
 	
-	private int totalBudget;
-	private int manNum = file.MAN;
+	private static int totalBudget;
+	private static int manNum = file.MAN;
 	private static int parkNum = file.PARK;
-	private int facilityNum = file.FACILITY;
+	private static int facilityNum = file.FACILITY;
 	private int totalCost;
 	private static int[][] parent_pool;
 	private int[][] optimal_facility_area;
@@ -24,8 +26,10 @@ public class FLSC {
 	ArrayList<chromosome> chromosomeArray = new ArrayList<chromosome>();
 	static Random rand = new Random();
 
-	public static void main(String args[]){
-		
+	public static void main(String args[]) throws IOException{
+
+		FLSC test = new FLSC(manNum,parkNum,facilityNum,totalBudget);
+		test.GA();
 	}
 
 	public FLSC(int man,int park,int facility,int budget) {
@@ -69,13 +73,15 @@ public class FLSC {
     	}
     }
 
-    public static void original_gene(int[][] S) {
+    public static void original_gene(int[][] S) throws IOException {
     	int scale = 0;
+    	int[][] myS = file.getS();
+    	
     	for(int i=0; i<poolLength; i++){
         	for(int j=0; j< parkNum; j++){
         		while(true){
 			    	scale = rand.nextInt(6);
-			    	if(scale != 0 && S[j][scale-1] == 1){
+			    	if(scale != 0 && file.S[j][scale-1] == 1){
 			    		parent_pool[i][j] = scale;
 			    		break;
 			    	}else if(scale == 0){
@@ -131,8 +137,8 @@ public class FLSC {
     	int js_area = 0;	
 		int is_zero = 0;
 
+		//Initialize
 		int[][] facility_floor_area = new int[parkNum][];
-
 		for (int i = 0; i< parkNum; i++) {
     	    facility_floor_area[i] = new int[facilityNum];
     	    for (int j = 0; j < facilityNum; j++){
@@ -149,9 +155,9 @@ public class FLSC {
 				is_zero = 1;
 				js_area = 0;
 			}
-	
-			while(true){
-						
+			int sum =0;
+			while(is_zero==0 || sum>=js_area){
+				System.out.println("FUCK");
 				for(int j = 0; j < facilityNum; j++){
 					if(js_area != 0 && T[i][j] != 0){
 						if(is_zero == 0){
@@ -165,7 +171,7 @@ public class FLSC {
 						facility_floor_area[i][j] = 0;
 					}				
 				}
-				int sum = 0;
+//				sum = 0;
 				if(is_zero == 1){
 					break;
 				}else{
@@ -203,14 +209,19 @@ public class FLSC {
 		return total_cost;
     }
 
-    public double fitness(int num_of_chromosome) {
+    public double fitness(int num_of_chromosome) throws IOException {
+		int[] myD = file.getD();
+		int[][] myQ = file.getQ();
+		int[][] myT = file.getT();
+		int[] myC = file.getC();
+		int[][] myF = file.getF();
+				
     	boolean the_same = false;
     	int equalCount;
     	int index = 0;
     	for(int i=0;i<poolLength;i++) {
     		equalCount = 10;
     		the_same = false;
-    		System.out.println("lala");
 
     		for(int j=0;j<parkNum;j++) {
     			System.out.print("*"+kid_pool[num_of_chromosome][j]+" ");
@@ -259,7 +270,8 @@ public class FLSC {
                     	exerciseLocation[i][j][k] = 0;
                 	}
             	}
-    		}    	
+    		}   
+    		
         	for (int i = 0; i< parkNum; i++) {
                 ff_area[i] = new int[facilityNum];
                 availableDistribution[i] = new int[facilityNum];
@@ -272,6 +284,11 @@ public class FLSC {
                 tempMax=0;
                 int tempPeople=0;
                 ff_area = randomZ(file.q, file.T, num_of_chromosome);
+                // .__    .   .     ___
+                // |  \   |   |    /
+                // |__/   |   |   |    __
+                // |  \   |   |   |     /
+                // |__/    \_/     \___/ 
                 while(cost(file.f, file.c, ff_area, num_of_chromosome) > totalBudget){
                     ff_area = randomZ(file.q, file.T, num_of_chromosome);
                 }
@@ -280,11 +297,12 @@ public class FLSC {
                         availableDistribution[i][j]=(int) (ff_area[i][j]*(file.k[j]));
                     }
                 }
+                
                 while(true) {
             		boolean negative = true;
             		for(int i=0;i<manNum;i++) {
             			for(int j = 0; j < parkNum; j++){
-                        	ArrayList temp = new ArrayList();
+                        	ArrayList<Triplet<Double, Integer, Integer>> temp = null;
                             for(int k = 0; k < facilityNum; k++){
                             	pairPreference = Triplet.with(file.p[i][j][k],j,k);
                             	temp.add(pairPreference);
@@ -376,95 +394,49 @@ public class FLSC {
     	}
     }
     
+ 
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-     
-    
-    /*
-    public void selection(){
+    public void selection() throws IOException{
     	
-    	vector < pair <double, int> > vector_result;
-        FLSC.Pair < double, int > result;
-        Pair (double, int) result;
-        
+    	ArrayList < Pair <Double, Integer> > vector_result = null;
+        Pair < Double, Integer > result = null;
+//        System.out.println("TRY1");
         for(int i = 0; i<poolLength*2; i++){
-            result.first = fitness(i);
-            System.out.println("fit!\n");
-            result.second = i;
-            vector_result.push_back(result);
+            result.setAt0(fitness(i));
+            result.setAt1(i);
+            vector_result.add(result);
+            
         }
-
-        priority_queue < pair <double, int> > select;
+//        System.out.println("TRY2");
+        
+        PriorityQueue < Pair <Double, Integer> > select = null;
 
         for(int i = 0; i < poolLength*2; i++){
-            select.push(vector_result[i]);
+            select.add(vector_result.get(i));
         }
+//        System.out.println("TRY3");
 
         for(int i = 0; i < poolLength; i++){
-            parent_pool[i] = kid_pool[select.top().second];
-            select.pop(); 
+            parent_pool[i] = kid_pool[select.peek().getValue1()];
+            select.poll(); 
         }
-        sort(chromosomeArray.begin(), chromosomeArray.end(), comparison);
+//        System.out.println("TRY4");
+//        sort(chromosomeArray.begin(), chromosomeArray.end(), comparison);
+        Collections.sort(chromosomeArray,new Comparator<chromosome>() {
+        	public int compare(chromosome a, chromosome b) {
+        		return a.numOfExercise - b.numOfExercise;
+        	}
+        });
+//        System.out.println("TRY5");
+        
         for(int i = 0; i < poolLength; i++){
-            chromosomeArray.pop_back();
+            chromosomeArray.remove(chromosomeArray.size()-1);
         }
 
         System.out.println("Selection!~!\n");
     	
     }
-    */
     
     
     
@@ -520,21 +492,24 @@ public class FLSC {
     	System.out.print(this.totalCost);
     }
     
-    public void GA() {
+    public void GA() throws IOException {
 		
-    	int callIteration = 10;
-        this.original_gene(file.S);
-        this.display_parent();
-/*
-        while(callIteration>1){
- 
-            this.crossover();
-            this.mutation();
+        original_gene(file.S);
+        display_parent();
+//        crossover();
+//        mutation();
+//        selection();
+        
+
+        for(int iteration=0;iteration<10;iteration++) {
+        	System.out.println("iteration: "+iteration);
+            crossover();
+            mutation();
             System.out.println("yoooo\n");
-            this.selection();
-            callIteration--;
+            selection();
         }
-*/
+        System.out.println("Finish!");
+
     }
     
     
