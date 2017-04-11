@@ -553,7 +553,7 @@ public class FLSC {
         selection();
         
 
-        for(int iteration=0;iteration<100;iteration++) {
+        for(int iteration=0;iteration<500;iteration++) {
         	System.out.println("iteration: "+iteration);
             crossover();
             mutation();

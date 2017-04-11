@@ -3,7 +3,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 import java.util.Random;
 import java.util.PriorityQueue;  
 
@@ -27,9 +26,9 @@ public class FLSC {
 
 	public static void main(String args[]) throws IOException{
 
-		file.main(null);
 		FLSC test = new FLSC(manNum,parkNum,facilityNum,totalBudget);
 		test.GA();
+//		return chromosomeArray.get(chromosomeArray.size()-1).getNumOfExercise();
 	}
 	
 	public static Comparator<Triplet<Double,Integer,Integer>> preferenceCompare = new Comparator<Triplet<Double,Integer,Integer>> () {
@@ -81,7 +80,7 @@ public class FLSC {
 
     public static void original_gene(int[][] S) throws IOException {
     	int scale = 0;
-//    	int[][] myS = file.getS();
+    	int[][] myS = file.getS();
     	
     	for(int i=0; i<poolLength; i++){
         	for(int j=0; j< parkNum; j++){
@@ -100,13 +99,11 @@ public class FLSC {
     }
 
     public static void crossover() {
-    	
     	int pos = rand.nextInt(parkNum);
     	int[][] frontGene = new int[poolLength][];
     	int[][] backGene = new int[poolLength][];
     	int[][] newGene = new int[poolLength][];
     	
-    	// slice the parent_pool to frontGene and backGene
     	for(int i=0;i<poolLength;i++) {
     		frontGene[i] = new int[pos];
     		backGene[i] = new int[parkNum-pos];
@@ -120,48 +117,35 @@ public class FLSC {
     		}
     	}
     	
-    	for(int i=0;i<poolLength;i++) {
-    		System.out.print(i+" : ");
-    		for(int j=0;j<pos;j++) {
-    			System.out.print(frontGene[i][j]);
-    		}
-    		System.out.print(" | ");
-    		for(int j=pos;j<parkNum;j++) {
-    			System.out.print(backGene[i][j-pos]);
-    		}
-    		System.out.println();
-    	}
     	
-    	// determine shuffling order
-    	List<Integer> shuffleOrder = new ArrayList<Integer>();
-    	for(int i=0;i<poolLength;i++) {
-    		shuffleOrder.add(i);
-    	}
-    	Collections.shuffle(shuffleOrder);
-    	
-    	// combine frontGene and backGene to newGene
-    	for(int i=0;i<poolLength;i++) {
-    		System.out.print(i+" : ");
-    		for(int j=0;j<pos;j++) {
-    			System.out.print(frontGene[i][j]);
-    		}
-    		System.out.print(" | ");
-    		for(int j=pos;j<parkNum;j++) {
-    			System.out.print(backGene[shuffleOrder.get(i)][j-pos]);
-    		}
-    		System.out.print(" : "+shuffleOrder.get(i));
-    		System.out.println();
-    		
-    		System.arraycopy(frontGene[i], 0, newGene[i], 0, pos);
-    		System.arraycopy(backGene[shuffleOrder.get(i)], 0, newGene[i], pos, parkNum-pos);
-    	}
-    	
-    	// save the result to parent_pool
-    	for(int i=0;i<poolLength;i++) {
-    		for(int j=0;j<parkNum;j++) {
-    			parent_pool[i][j] = newGene[i][j]; 
-    		}
-    	}
+//		for (int i = 0; i < poolLength/2; i++){
+//    	    for (int j = 0; j < parkNum/2; j++){
+//    	        kid_pool[2*i][j] = parent_pool[2*i][j];
+//    	    }
+//			for (int j = parkNum/2; j < parkNum; j++){
+//    	        kid_pool[2*i][j] = parent_pool[2*i+1][j];
+//    	    }
+//    	}
+//	
+//	
+//    	for (int i = 1; i < poolLength/2; i++){
+//
+//    	    for (int j = 0; j < parkNum/2; j++){
+//    	        kid_pool[2*i-1][j] = parent_pool[2*i-1][j];
+//    	    }
+//	
+//    	    for (int j = parkNum/2; j < parkNum; j++){
+//    	        kid_pool[2*i-1][j] = parent_pool[2*i-2][j];
+//    	    }
+//    	    
+//    	}
+//	
+//    	for (int i = poolLength ; i < 2*poolLength; i++) {
+//    	    for (int j = 0; j < parkNum; j++) {
+//    	        kid_pool[i][j] = parent_pool[i-poolLength][j];
+//    	    }
+//    	}
+
     }
 
     public int[][] randomZ(int[][] q,int[][] T,int num_of_chromosome) {
@@ -240,12 +224,12 @@ public class FLSC {
     }
 
     public int fitness(int num_of_chromosome) throws IOException {
-//		int[] myD = file.getD();
-//		int[][] myQ = file.getQ();
-//		int[][] myT = file.getT();
-//		int[] myC = file.getC();
-//		int[][] myF = file.getF();
-//		double[] myK = file.getK();
+		int[] myD = file.getD();
+		int[][] myQ = file.getQ();
+		int[][] myT = file.getT();
+		int[] myC = file.getC();
+		int[][] myF = file.getF();
+		double[] myK = file.getK();
 		double[][][] myP = file.getP();
 
 				
@@ -547,13 +531,13 @@ public class FLSC {
     public void GA() throws IOException {
 		
         original_gene(file.S);
-//        display_parent();
+        display_parent();
         crossover();
         mutation();
         selection();
         
 
-        for(int iteration=0;iteration<100;iteration++) {
+        for(int iteration=0;iteration<1;iteration++) {
         	System.out.println("iteration: "+iteration);
             crossover();
             mutation();

@@ -18,7 +18,7 @@ public class FLSC {
 	private static int parkNum = file.PARK;
 	private static int facilityNum = file.FACILITY;
 	private int totalCost;
-	private static int[][] parent_pool;
+//	private static int[][] parent_pool;
 	private int[][] optimal_facility_area;
 	private static int[][] kid_pool;
 	private static int poolLength = 20;
@@ -546,7 +546,8 @@ public class FLSC {
     
     public void GA() throws IOException {
 		
-        original_gene(file.S);
+    	int[][] parent_pool;
+        parent_pool = original_gene(file.S);
 //        display_parent();
         crossover();
         mutation();

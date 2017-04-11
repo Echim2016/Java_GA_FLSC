@@ -27,9 +27,9 @@ public class FLSC {
 
 	public static void main(String args[]) throws IOException{
 
-		file.main(null);
 		FLSC test = new FLSC(manNum,parkNum,facilityNum,totalBudget);
 		test.GA();
+//		return chromosomeArray.get(chromosomeArray.size()-1).getNumOfExercise();
 	}
 	
 	public static Comparator<Triplet<Double,Integer,Integer>> preferenceCompare = new Comparator<Triplet<Double,Integer,Integer>> () {
@@ -81,7 +81,7 @@ public class FLSC {
 
     public static void original_gene(int[][] S) throws IOException {
     	int scale = 0;
-//    	int[][] myS = file.getS();
+    	int[][] myS = file.getS();
     	
     	for(int i=0; i<poolLength; i++){
         	for(int j=0; j< parkNum; j++){
@@ -100,11 +100,19 @@ public class FLSC {
     }
 
     public static void crossover() {
+    	for(int i=0;i<poolLength;i++) {
+    		for(int j=0;j<parkNum;j++) {
+    			System.out.print(parent_pool[i][j]);
+    		}
+    		System.out.println();
+    	}
     	
     	int pos = rand.nextInt(parkNum);
     	int[][] frontGene = new int[poolLength][];
     	int[][] backGene = new int[poolLength][];
     	int[][] newGene = new int[poolLength][];
+    	
+    	System.out.println("\nposition: "+pos);
     	
     	// slice the parent_pool to frontGene and backGene
     	for(int i=0;i<poolLength;i++) {
@@ -121,7 +129,6 @@ public class FLSC {
     	}
     	
     	for(int i=0;i<poolLength;i++) {
-    		System.out.print(i+" : ");
     		for(int j=0;j<pos;j++) {
     			System.out.print(frontGene[i][j]);
     		}
@@ -133,34 +140,16 @@ public class FLSC {
     	}
     	
     	// determine shuffling order
-    	List<Integer> shuffleOrder = new ArrayList<Integer>();
+    	List<Integer> shffleOrder = new ArrayList<Integer>();
     	for(int i=0;i<poolLength;i++) {
-    		shuffleOrder.add(i);
+    		shffleOrder.add(i);
     	}
-    	Collections.shuffle(shuffleOrder);
+    	Collections.shuffle(shffleOrder);
     	
-    	// combine frontGene and backGene to newGene
+    	// concat frontGene and backGene to newGene
     	for(int i=0;i<poolLength;i++) {
-    		System.out.print(i+" : ");
-    		for(int j=0;j<pos;j++) {
-    			System.out.print(frontGene[i][j]);
-    		}
-    		System.out.print(" | ");
-    		for(int j=pos;j<parkNum;j++) {
-    			System.out.print(backGene[shuffleOrder.get(i)][j-pos]);
-    		}
-    		System.out.print(" : "+shuffleOrder.get(i));
-    		System.out.println();
-    		
-    		System.arraycopy(frontGene[i], 0, newGene[i], 0, pos);
-    		System.arraycopy(backGene[shuffleOrder.get(i)], 0, newGene[i], pos, parkNum-pos);
-    	}
-    	
-    	// save the result to parent_pool
-    	for(int i=0;i<poolLength;i++) {
-    		for(int j=0;j<parkNum;j++) {
-    			parent_pool[i][j] = newGene[i][j]; 
-    		}
+    		System.arraycopy(frontGene[i], 0, newGene, 0, pos);
+    		System.arraycopy(backGene[shffleOrder.get(i)], 0, newGene, pos, parkNum);
     	}
     }
 
@@ -240,12 +229,12 @@ public class FLSC {
     }
 
     public int fitness(int num_of_chromosome) throws IOException {
-//		int[] myD = file.getD();
-//		int[][] myQ = file.getQ();
-//		int[][] myT = file.getT();
-//		int[] myC = file.getC();
-//		int[][] myF = file.getF();
-//		double[] myK = file.getK();
+		int[] myD = file.getD();
+		int[][] myQ = file.getQ();
+		int[][] myT = file.getT();
+		int[] myC = file.getC();
+		int[][] myF = file.getF();
+		double[] myK = file.getK();
 		double[][][] myP = file.getP();
 
 				
@@ -549,23 +538,23 @@ public class FLSC {
         original_gene(file.S);
 //        display_parent();
         crossover();
-        mutation();
-        selection();
-        
-
-        for(int iteration=0;iteration<100;iteration++) {
-        	System.out.println("iteration: "+iteration);
-            crossover();
-            mutation();
-            selection();
-        }
-//        for(chromosome e:chromosomeArray) {
-//        	System.out.println(e.numOfExercise);
+//        mutation();
+//        selection();
+//        
+//
+//        for(int iteration=0;iteration<1;iteration++) {
+//        	System.out.println("iteration: "+iteration);
+//            crossover();
+//            mutation();
+//            selection();
 //        }
-        for(int i=0;i<chromosomeArray.size();i++) {
-        	System.out.println(i+": "+chromosomeArray.get(i).numOfExercise);
-        }
-        System.out.println("Finish!");
+////        for(chromosome e:chromosomeArray) {
+////        	System.out.println(e.numOfExercise);
+////        }
+//        for(int i=0;i<chromosomeArray.size();i++) {
+//        	System.out.println(i+": "+chromosomeArray.get(i).numOfExercise);
+//        }
+//        System.out.println("Finish!");
 
     }
     

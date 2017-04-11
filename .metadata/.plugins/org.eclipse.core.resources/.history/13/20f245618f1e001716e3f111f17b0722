@@ -240,12 +240,12 @@ public class FLSC {
     }
 
     public int fitness(int num_of_chromosome) throws IOException {
-//		int[] myD = file.getD();
-//		int[][] myQ = file.getQ();
-//		int[][] myT = file.getT();
-//		int[] myC = file.getC();
-//		int[][] myF = file.getF();
-//		double[] myK = file.getK();
+		int[] myD = file.getD();
+		int[][] myQ = file.getQ();
+		int[][] myT = file.getT();
+		int[] myC = file.getC();
+		int[][] myF = file.getF();
+		double[] myK = file.getK();
 		double[][][] myP = file.getP();
 
 				

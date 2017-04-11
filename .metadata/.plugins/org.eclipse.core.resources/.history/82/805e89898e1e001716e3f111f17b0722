@@ -27,9 +27,9 @@ public class FLSC {
 
 	public static void main(String args[]) throws IOException{
 
-		file.main(null);
 		FLSC test = new FLSC(manNum,parkNum,facilityNum,totalBudget);
 		test.GA();
+//		return chromosomeArray.get(chromosomeArray.size()-1).getNumOfExercise();
 	}
 	
 	public static Comparator<Triplet<Double,Integer,Integer>> preferenceCompare = new Comparator<Triplet<Double,Integer,Integer>> () {
@@ -81,7 +81,7 @@ public class FLSC {
 
     public static void original_gene(int[][] S) throws IOException {
     	int scale = 0;
-//    	int[][] myS = file.getS();
+    	int[][] myS = file.getS();
     	
     	for(int i=0; i<poolLength; i++){
         	for(int j=0; j< parkNum; j++){
@@ -240,12 +240,12 @@ public class FLSC {
     }
 
     public int fitness(int num_of_chromosome) throws IOException {
-//		int[] myD = file.getD();
-//		int[][] myQ = file.getQ();
-//		int[][] myT = file.getT();
-//		int[] myC = file.getC();
-//		int[][] myF = file.getF();
-//		double[] myK = file.getK();
+		int[] myD = file.getD();
+		int[][] myQ = file.getQ();
+		int[][] myT = file.getT();
+		int[] myC = file.getC();
+		int[][] myF = file.getF();
+		double[] myK = file.getK();
 		double[][][] myP = file.getP();
 
 				
