@@ -13,10 +13,10 @@ public class FLSC {
 	
 	private int costIteration = 2;
 	
-	private static int totalBudget = file.budget;
-	private static int manNum = file.MAN;
-	private static int parkNum = file.PARK;
-	private static int facilityNum = file.FACILITY;
+	public static int totalBudget;
+	public static int manNum;
+	public static int parkNum;
+	public static int facilityNum;
 	private int totalCost;
 	private static int[][] parent_pool;
 	private int[][] optimal_facility_area;
@@ -26,9 +26,13 @@ public class FLSC {
 	static Random rand = new Random();
 
 	public static void main(String args[]) throws IOException{
-
+		ReadFile.main(null);
 		file.main(null);
+		
 		FLSC test = new FLSC(manNum,parkNum,facilityNum,totalBudget);
+		System.out.println(manNum);
+		System.out.println(parkNum);
+		System.out.println(facilityNum);
 		test.GA();
 	}
 	
@@ -39,10 +43,14 @@ public class FLSC {
 	};
 
 	public FLSC(int man,int park,int facility,int budget) {
-		manNum = man;
-		parkNum = park;
-		facilityNum = facility;
-		totalBudget = budget;
+//		manNum = man;
+//		parkNum = park;
+//		facilityNum = facility;
+//		totalBudget = budget;
+		manNum = ReadFile.oldman;
+		parkNum = ReadFile.park;
+		facilityNum = ReadFile.facility;
+		totalBudget = ReadFile.budget;
 
 		totalCost = 0;
 
@@ -240,13 +248,8 @@ public class FLSC {
     }
 
     public int fitness(int num_of_chromosome) throws IOException {
-//		int[] myD = file.getD();
-//		int[][] myQ = file.getQ();
-//		int[][] myT = file.getT();
-//		int[] myC = file.getC();
-//		int[][] myF = file.getF();
-//		double[] myK = file.getK();
 		double[][][] myP = file.getP();
+		
 
 				
     	boolean the_same = false;
